@@ -3,6 +3,11 @@ import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 
 // pages
 import Home from './pages/Home'
+import Products from './pages/Products'
+import Pricing from './pages/Pricing'
+import HowItWorks from './pages/HowItWorks'
+import About from './pages/About'
+import Contact from './pages/Contact'
 import {AppProvider} from './Context'
 
 
@@ -16,6 +21,11 @@ function App() {
         <Router>
           <Switch>
             <Route exact path="/" component={Home}/>
+            <Route exact path="/products" component={Products}/>
+            <Route exact path="/pricing" component={Pricing}/>
+            <Route exact path="/how-it-works" component={HowItWorks}/>
+            <Route exact path="/about" component={About}/>
+            <Route exact path="/contact" component={Contact}/>
           </Switch>
         </Router>
       </AppProvider>
