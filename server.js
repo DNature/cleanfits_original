@@ -36,7 +36,6 @@ function requireHTTPS(req, res, next) {
 }
 
 // EXPRESS MIDDLEWARES
-app.use(requireHTTPS);
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
