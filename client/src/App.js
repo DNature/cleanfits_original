@@ -11,6 +11,10 @@ import Contact from './pages/Contact'
 import FourOFour from './pages/404'
 import {AppProvider} from './Context'
 
+// Admin pages ---> Authenticated routes
+import AdminHome from './pages/Admin'
+import AdminLogin from './pages/Admin/Login'
+
 
 function App() {
 
@@ -25,6 +29,8 @@ function App() {
             <Route exact path="/how-it-works" component={HowItWorks}/>
             <Route exact path="/about" component={About}/>
             <Route exact path="/contact" component={Contact}/>
+            <Route path="/admin" component={AdminHome} />
+            <Route exact path="/admin/login" component={AdminLogin} />
             <Route component={FourOFour}/>
           </Switch>
         </Router>
