@@ -1,21 +1,18 @@
 import React from 'react'
+import Experience from '../components/Content/Experience'
+import HowItWorks from '../components/Content/HowItWorks'
+import PricingTable from '../components/Content/PricingTable'
+import GetInTouch from '../components/Content/GetInTouch'
 
 import Layout from '../Layout'
 const Home = () => {
   return (
     <Layout>
       <main style={{display: "block"}}>
-        <div className="container">
-          <div className="row pt-5">
-            <div className="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 d-flex justify-content-center align-item-center text-center" style={{flexDirection: 'column'}}>
-              <h1 className="bd-title">Experience Premium Servies</h1>
-              <p className="lead mt-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima officiis voluptas repellendus id aliquid animi.</p>
-            </div>
-            <div className="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6" style={{overflow: 'hidden'}}>
-              <img src="/images/shirts.jpeg" className="img-fluid" alt="Picture of shirts in hangers"/>
-            </div>
-          </div>
-        </div>
+        <Experience />
+        <HowItWorks title="How it Works"/>
+        <PricingTable title="Pricing"/>
+        <GetInTouch title="Get In Touch" />
       </main>
     </Layout>
   )

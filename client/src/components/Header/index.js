@@ -5,7 +5,7 @@ const Header = ({pathname}) => {
   console.log(pathname)
   return(
     <header style={{position: 'relative'}}>
-      <nav className="navbar navbar-expand-lg navbar-light" style={{backgroundColor: '#fff'}}>
+      <nav className="navbar navbar-expand-lg navbar-light" style={{backgroundColor: '#fff', zIndex: 1500}}>
         <div className="container">
           <a className="navbar-brand" href="/">Cleanfits</a>
           <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
