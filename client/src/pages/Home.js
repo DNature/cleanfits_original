@@ -5,9 +5,9 @@ import PricingTable from '../components/Content/PricingTable'
 import GetInTouch from '../components/Content/GetInTouch'
 
 import Layout from '../Layout'
-const Home = () => {
+const Home = ({location}) => {
   return (
-    <Layout>
+    <Layout pathname={location.pathname}>
       <main style={{display: "block"}}>
         <Experience />
         <HowItWorks title="How it Works"/>

@@ -2,13 +2,13 @@ import React from 'react'
 import Title from '../Title/Title'
 import {Link} from 'react-router-dom'
 
-const PricingTable = ({title}) => {
+const PricingTable = ({title = ""}) => {
   return (
     <div className="pricing-table py-5">
       <div className="container py-5">
         <div className="row">
 
-          <div className="col-12 text-center my-5">
+          <div className="col-12 text-center mb-5">
             <Title title={title} />
           </div>
 
@@ -100,6 +100,12 @@ const PricingTable = ({title}) => {
             </div>
           </div>
 
+        </div>
+
+        <div className="row">
+          <div className="col-12 text-center">
+            <Link to="/pricing" className="btn btn-outline-primary">See All Pricing Options <span style={{fontWeight: 600, fontSize: '1rem'}}>></span></Link>
+          </div>
         </div>
       </div>
     </div>

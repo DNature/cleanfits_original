@@ -8,12 +8,11 @@ import Pricing from './pages/Pricing'
 import HowItWorks from './pages/HowItWorks'
 import About from './pages/About'
 import Contact from './pages/Contact'
+import FourOFour from './pages/404'
 import {AppProvider} from './Context'
 
 
 function App() {
-
-
 
   return (
     <Suspense fallback={() => <p>loading...</p>}>
@@ -26,6 +25,7 @@ function App() {
             <Route exact path="/how-it-works" component={HowItWorks}/>
             <Route exact path="/about" component={About}/>
             <Route exact path="/contact" component={Contact}/>
+            <Route component={FourOFour}/>
           </Switch>
         </Router>
       </AppProvider>

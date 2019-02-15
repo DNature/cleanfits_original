@@ -3,7 +3,7 @@ import Title from '../Title/Title'
 
 const HowItWorks = ({title}) => {
   return (
-    <div className="how-it-works bg-light py-5">
+    <div className="how-it-works bg-light py-5 mb-5">
 
       <div className="container py-5">
         <div className="row">

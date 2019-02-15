@@ -2,7 +2,7 @@ import React from 'react'
 import {Link} from 'react-router-dom'
 const Footer = () => {
   return(
-    <footer className="footer bg-dark pt-5 mt-4">
+    <footer className="footer bg-dark pt-5 mt-4" style={{overflow: 'hidden'}}>
       <div className="container">
         <div className="row">
           <div className="col-xs-12 col-sm-12 col-md-6 col-lg-4 mb-5 text-light">
@@ -23,9 +23,9 @@ const Footer = () => {
                 <li className="nav-item">
                   <Link className="nav-link" to="/">Home</Link>
                 </li>
-                <li className="nav-item">
+                {/* <li className="nav-item">
                   <Link className="nav-link" to="/producrs">Products</Link>
-                </li>
+                </li> */}
                 <li className="nav-item">
                   <Link className="nav-link" to="/pricing">Pricing</Link>
                 </li>

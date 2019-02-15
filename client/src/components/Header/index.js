@@ -1,22 +1,28 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
+import './Header.css'
 
-const Header = ({pathname}) => {
+const Header = ({pathname = ""}) => {
   console.log(pathname)
   return(
-    <header style={{position: 'relative'}}>
-      <nav className="navbar navbar-expand-lg navbar-light" style={{backgroundColor: '#fff', zIndex: 1500}}>
+    <header className={pathname === "/" ? 'header': null}>
+      <nav className="navbar navbar-expand-lg navbar-light fixed-top"
+        style={{
+          backgroundColor: '#fff',
+          zIndex: 1500,
+          borderBottom: '1px solid #ccc'
+        }}>
         <div className="container">
-          <a className="navbar-brand" href="/">Cleanfits</a>
+          <Link className="navbar-brand" to="/">Cleanfits</Link>
           <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
           </button>
 
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav ml-auto">
-              <li className={pathname === '/products' ? 'nav-item active' : 'nav-item'}>
+              {/* <li className={pathname === '/products' ? 'nav-item active' : 'nav-item'}>
                 <Link className="nav-link" to="/products">Products</Link>
-              </li>
+              </li> */}
               <li className={pathname === '/pricing' ? 'nav-item active' : 'nav-item'}>
                 <Link className="nav-link" to="/pricing">Pricing</Link>
               </li>
@@ -34,19 +40,24 @@ const Header = ({pathname}) => {
           </div>
         </div>
       </nav>
-      <div className="overlay">
-        <div className="container" style={{
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          textAlign: 'center',
-          alignItems: 'center',
-          height: '100vh'
-        }}>
-          <h1 className="text-white hero-title">On-Demand Premium Dry Cleaning Services</h1>
-          <Link to="/signup" className="btn btn-primary btn-lg mt-5">SIGN ME UP</Link>
+      <br />
+      <br />
+      {pathname === '/' ?  (
+        <div className="overlay">
+          <div className="container" style={{
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            textAlign: 'center',
+            alignItems: 'center',
+            height: '100vh'
+          }}>
+            <h1 className="text-white hero-title">On-Demand Premium Dry Cleaning Services</h1>
+            <Link to="/signup" className="btn btn-primary btn-lg mt-5">SIGN ME UP</Link>
+          </div>
         </div>
-      </div>
+      ) : null}
+
     </header>
   )
 }
