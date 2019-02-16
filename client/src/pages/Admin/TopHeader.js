@@ -40,18 +40,18 @@ const TopHeader = () => {
       </nav>
 
       <div className="container">
-        <ul class="nav nav-tabs justify-content-center">
-          <li class="nav-item">
-            <Link to="/" class="nav-link active">Pricing</Link>
+        <ul className="nav nav-tabs justify-content-center">
+          <li className="nav-item">
+            <Link to="/" className="nav-link active">Pricing</Link>
           </li>
-          <li class="nav-item">
-            <Link to="/" class="nav-link">Link</Link>
+          <li className="nav-item">
+            <Link to="/" className="nav-link">Link</Link>
           </li>
-          <li class="nav-item">
-            <Link to="/" class="nav-link">Link</Link>
+          <li className="nav-item">
+            <Link to="/" className="nav-link">Link</Link>
           </li>
-          <li class="nav-item">
-            <Link to="/" class="nav-link">Link</Link>
+          <li className="nav-item">
+            <Link to="/" className="nav-link">Link</Link>
           </li>
         </ul>
       </div>

@@ -1,18 +1,12 @@
-import React, {useState, useEffect, useRef} from 'react'
+import React, {useState, useEffect} from 'react'
 
-export default function useScrollPosition() {
-  const [scrollPosition, setScrollPosition] = useState(0)
+export default function useScrollPosition(position) {
+  const [scrollPosition, setScrollPosition] = useState(position)
 
   useEffect(() => {
-    const scrollY = window.screenY
-    const currentScrollPosition = useRef(scrollY)
-    window.addEventListener('scroll', () => {
-      if(scrollY > scrollPosition) {
-        setScrollPosition(0)
-        window.scrollTo(0, scrollPosition)
-      }
-    })
+    setScrollPosition(position)
+    window.scrollTo(0, scrollPosition)
   }, [])
 
-  return [scrollPosition, currentScrollPosition]
+  return [scrollPosition, setScrollPosition]
 }
