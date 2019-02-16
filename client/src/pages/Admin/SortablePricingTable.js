@@ -57,7 +57,10 @@ const SortablePricingTable = ({editPricing, deletePricing}) => {
                   <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <button
                       onClick={() => editPricing(item._id)}
-                      className="dropdown-item btn btn-light">Edit</button>
+                      className="dropdown-item btn btn-light"
+                      data-toggle="modal"
+                      data-target="#editPricingModal"
+                      >Edit</button>
                     <button
                       onClick={() => deletePricing(item._id)}
                       className="dropdown-item btn btn-danger">Delete</button>

@@ -1,6 +1,7 @@
 import React from 'react'
 import reducer from '../Reducer'
 import axios from 'axios'
+import { pathInEnv } from '../utils';
 const AppContext = React.createContext()
 
 const initialState = {
@@ -16,7 +17,7 @@ function AppProvider ({children}) {
 
   React.useEffect(() => {
     axios({
-      url: 'http://localhost:4000/api/v1/pricing',
+      url: pathInEnv('/api/v1/pricing'),
       method: 'GET'
     })
       .then(response => {

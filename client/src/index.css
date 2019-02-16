@@ -9,6 +9,40 @@ body {
   font-weight: 500;
 }
 
+.naira {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 30px;
+  width: 30px;
+  color: #fff;
+}
+
+.badge {
+  display: flex;
+  align-items: center;
+}
+
+.naira:before {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 2.5px;
+  background-color: #fff;
+  top: 39%;
+}
+
+.naira:after {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 2.5px;
+  background-color: #fff;
+  top: 53%;
+}
+
 @media all and (max-width: 500px) {
   .hero-title {
     font-size: 2rem;

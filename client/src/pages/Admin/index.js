@@ -6,23 +6,22 @@ import {AppContext} from '../../Context'
 import {Link} from 'react-router-dom'
 import './index.css'
 import SortablePricingTable from './SortablePricingTable';
+import Modal from './Modal';
 
 const AdminHome = () => {
   const [isMenuShown, setMenuShown] = useState(true)
   const [currentItem, setCurrentItem] = useState({})
-  const [scrollPosition, setScrollPosition] = useState(window.scrollY)
   const {state: {pricing}, dispatch} = useContext(AppContext)
 
-  let item = null
-  useEffect(() => {
-    item !== null && setCurrentItem({...item[0]})
-  }, [item])
+  // let item = null
+  // useEffect(() => {
+  //   item !== null &&
+  //   console.log(currentItem)
+  // }, [item])
 
   const editPricing = id => {
-    item = pricing.filter(i => i._id === id)
+    let item = pricing.filter(i => i._id === id)
     setCurrentItem({...item[0]})
-    setScrollPosition(0)
-    window.scrollTo(0, scrollPosition)
   }
 
   const deletePricing = id => {
@@ -31,6 +30,7 @@ const AdminHome = () => {
 
   return(
     <div className="admin-home">
+      <Modal currentItem={currentItem}/>
       <TopHeader
         isMenuShown={isMenuShown}
         setMenuShown={setMenuShown}
@@ -40,7 +40,7 @@ const AdminHome = () => {
         <div className='pt-3'>
           <div className="container">
             <h1 className="bd-title">Pricing</h1>
-            <PricingForm currentItem={currentItem}/>
+            <PricingForm />
             <SortablePricingTable
               editPricing={editPricing}
               deletePricing={deletePricing}

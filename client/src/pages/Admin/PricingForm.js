@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react'
 import axios from 'axios'
 import {AppContext} from '../../Context'
+import {pathInEnv} from '../../utils'
 import reducer from '../../Reducer'
 
 const Alert = ({type, message}) => {
@@ -14,7 +15,7 @@ const Alert = ({type, message}) => {
   )
 }
 
-const PricingForm = ({currentItem}) => {
+const PricingForm = () => {
 
   const [values, setValues] = useState({
     name: '',
@@ -24,12 +25,7 @@ const PricingForm = ({currentItem}) => {
     message: null
   })
 
-  const [formMode, setFormMode] = useState('create')
   const {state: { pricingStatus }, dispatch} = useContext(AppContext)
-
-  useEffect(() => {
-    console.log(currentItem)
-  }, [currentItem])
 
   const submitPricingForm = e => {
     e.preventDefault()
@@ -46,7 +42,7 @@ const PricingForm = ({currentItem}) => {
     setValues({name: '', price: 0, discount: 0, image: ''})
 
     axios({
-      url: 'http://localhost:4000/api/v1/pricing',
+      url:  pathInEnv('/api/v1/pricing'),
       method: 'POST',
       data
     })
