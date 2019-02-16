@@ -1,11 +1,12 @@
 import React, {useContext} from 'react'
+import { pathInEnv } from '../../utils';
 
 const PricingCard = ({item}) => {
   return(
     <div className="card mb-3 w-100" style={{position: 'relative'}}>
       <div style={{position: 'relative'}}>
         <img
-          src={`http://localhost:4000/images/${item.image}`} className="card-img-top"
+          src={pathInEnv(`/images/${item.image}`)} className="card-img-top"
           alt={String(item.image).split('.')[0]}
           style={{objectFit: 'cover', height: '250px'}}
           />
