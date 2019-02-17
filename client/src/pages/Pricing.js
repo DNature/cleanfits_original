@@ -21,7 +21,7 @@ const Pricing = ({ location }) => {
 
   return (
     <Layout pathname={location.pathname}>
-      <div className="container">
+      <div className="container pt-5">
         <div className="row">
           {pricing.length > 0 ? (
             pricing.map(item => (
@@ -35,11 +35,11 @@ const Pricing = ({ location }) => {
           ) : (
             <div className="text-center mx-auto pt-5 mt-5">
               <div
-                class="spinner-grow"
+                className="spinner-grow"
                 style={{ width: "3rem", height: "3rem" }}
                 role="status"
               >
-                <span class="sr-only">Loading...</span>
+                <span className="sr-only">Loading...</span>
               </div>
             </div>
           )}
