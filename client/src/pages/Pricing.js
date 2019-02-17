@@ -1,40 +1,53 @@
-import React, {useState, useEffect, useContext} from 'react'
-import PricingTable from '../components/Content/PricingTable'
-import {AppContext} from '../Context'
-import Layout from '../Layout'
-import PricingCard from '../components/Content/PricingCard';
+import React, { useState, useEffect, useContext } from "react";
+import PricingTable from "../components/Content/PricingTable";
+import { AppContext } from "../Context";
+import Layout from "../Layout";
+import PricingCard from "../components/Content/PricingCard";
 
-const Pricing = ({location}) => {
-  const [scrollPosition, setScrollPosition] = useState(0)
+const Pricing = ({ location }) => {
+  const [scrollPosition, setScrollPosition] = useState(0);
 
   useEffect(() => {
-    if(window.scrollY > scrollPosition) {
-      setScrollPosition(0)
+    if (window.scrollY > scrollPosition) {
+      setScrollPosition(0);
       //window.scrollTo(0, scrollPosition)
     }
-  })
+  });
 
-  const {state: {pricing}, dispatch} = useContext(AppContext);
+  const {
+    state: { pricing },
+    dispatch
+  } = useContext(AppContext);
 
-  return(
+  return (
     <Layout pathname={location.pathname}>
       <div className="container">
-        <PricingTable title="Subscribe"/>
         <div className="row">
-          {pricing.length > 0
-            ? pricing.map(item => (
+          {pricing.length > 0 ? (
+            pricing.map(item => (
               <div
                 key={item._id}
-                className="col-xs-12 col-sm-12 col-md-6 col-lg-3 col-xl-3 d-flex justify-content-between">
-                  <PricingCard item={item} />
+                className="col-xs-12 col-sm-12 col-md-6 col-lg-3 col-xl-3 d-flex justify-content-between"
+              >
+                <PricingCard item={item} />
               </div>
             ))
-            : <p>Loading...</p>
-          }
+          ) : (
+            <div className="text-center mx-auto pt-5 mt-5">
+              <div
+                class="spinner-grow"
+                style={{ width: "3rem", height: "3rem" }}
+                role="status"
+              >
+                <span class="sr-only">Loading...</span>
+              </div>
+            </div>
+          )}
         </div>
+        <PricingTable title="Subscribe" />
       </div>
     </Layout>
-  )
-}
+  );
+};
 
-export default Pricing
+export default Pricing;
