@@ -29,7 +29,7 @@ const PricingCard = ({ item }) => {
     if (cart.length === 0 || !itemIsInCart()) {
       dispatch({ type: "ADD_TO_CART", payload: item });
     } else {
-      dispatch({ type: "REMOVE_FROM_CART", payload: item });
+      dispatch({ type: "REMOVE_FROM_CART", payload: item._id });
     }
   };
 

@@ -24,7 +24,7 @@ const reducer = (state, action) => {
       });
     case "REMOVE_FROM_CART":
       return Object.assign({}, state, {
-        cart: state.cart.filter(item => item._id !== action.payload._id)
+        cart: state.cart.filter(item => item._id !== action.payload)
       });
     default:
       return state;
