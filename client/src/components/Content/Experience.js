@@ -9,7 +9,7 @@ const Experience = () => {
           <p className="lead mt-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima officiis voluptas repellendus id aliquid animi.</p>
         </div>
         <div className="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6" style={{overflow: 'hidden'}}>
-          <img src="/images/shirts.jpeg" className="img-fluid" alt="Shirts in hangers"/>
+          <img src="/images/shirts2.webp" className="img-fluid" alt="Shirts in hangers"/>
         </div>
       </div>
     </div>
