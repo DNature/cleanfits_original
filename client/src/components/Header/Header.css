@@ -1,6 +1,6 @@
 .header {
   position: relative;
-  background: url(/images/laundry2.webp);
+  background: url(/images/laundry2.webp) no-repeat fixed 100%;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -30,4 +30,10 @@
   position: absolute !important;
   top: -10px;
   right: 0;
+}
+
+@media all and (max-width: 500px) {
+  .hero-title {
+    font-size: 2rem;
+  }
 }

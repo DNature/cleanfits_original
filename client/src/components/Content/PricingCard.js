@@ -1,6 +1,41 @@
 import React, { useContext, useEffect } from "react";
 import { pathInEnv } from "../../utils";
 import { AppContext } from "../../Context";
+import styled from "styled-components";
+
+const Naira = styled.span`
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 30px;
+  width: 30px;
+  color: #fff;
+
+  &:before {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 2.5px;
+    background-color: #fff;
+    top: 39%;
+  }
+
+  &:after {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 2.5px;
+    background-color: #fff;
+    top: 53%;
+  }
+`;
+
+const Badge = styled.div`
+  display: flex;
+  align-items: center;
+`;
 
 const PricingCard = ({ item }) => {
   const {
@@ -42,7 +77,7 @@ const PricingCard = ({ item }) => {
           alt={String(item.image).split(".")[0]}
           style={{ objectFit: "cover", height: "250px" }}
         />
-        <div
+        <Badge
           className="badge badge-danger"
           style={{
             position: "absolute",
@@ -51,9 +86,9 @@ const PricingCard = ({ item }) => {
             fontSize: "1.2rem"
           }}
         >
-          <span className="naira">N</span>
+          <Naira>N</Naira>
           {item.price}
-        </div>
+        </Badge>
       </div>
       <div className="card-body">
         <h5 className="card-title">{item.name}</h5>

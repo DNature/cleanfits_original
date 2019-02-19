@@ -1,9 +1,9 @@
-import React, {useState, useEffect, useReducer, useContext} from 'react'
+import React, {useState, useContext} from 'react'
 import TopHeader from './TopHeader'
 import PricingForm from './PricingForm'
-import axios from 'axios'
+//import axios from 'axios'
 import {AppContext} from '../../Context'
-import {Link} from 'react-router-dom'
+//import {Link} from 'react-router-dom'
 import './index.css'
 import SortablePricingTable from './SortablePricingTable';
 import Modal from './Modal';
@@ -11,7 +11,7 @@ import Modal from './Modal';
 const AdminHome = () => {
   const [isMenuShown, setMenuShown] = useState(true)
   const [currentItem, setCurrentItem] = useState({})
-  const {state: {pricing}, dispatch} = useContext(AppContext)
+  const {state: {pricing}} = useContext(AppContext)
 
   // let item = null
   // useEffect(() => {

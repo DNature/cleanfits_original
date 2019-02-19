@@ -15,8 +15,7 @@ const Pricing = ({ location }) => {
   });
 
   const {
-    state: { pricing },
-    dispatch
+    state: { pricing }
   } = useContext(AppContext);
 
   return (

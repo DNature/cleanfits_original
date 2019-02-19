@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from "react";
+import React, { useContext } from "react";
 import { AppContext } from "../../Context";
 
 const CartItem = ({
@@ -39,30 +39,29 @@ const CartItem = ({
               decrementItemCount(item.price);
               setCount({
                 ...count,
-                [item.name]: count[item.name] - 1
+                [item._id]: count[item._id] - 1 * item.price
               });
             }}
           >
             -
           </button>
-          <span className="btn btn-light">{Number(count[item.name]) || 1}</span>
+          <span className="btn btn-light">{Number(count[item._id]) || 1}</span>
           <button
             type="button"
             className="btn btn-light"
             onClick={() => {
               incrementItemCount(item.price);
               let initial = 1;
-              let value = count[item.name];
+              let value = count[item._id];
               if (value === undefined) {
                 setCount({
                   ...count,
-                  [item.name]: initial + 1
+                  [item._id]: initial + 1
                 });
               } else {
-                console.log(initial, (initial += 1));
                 setCount({
                   ...count,
-                  [item.name]: count[item.name] + 1
+                  [item._id]: count[item._id] + 1
                 });
               }
             }}
