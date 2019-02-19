@@ -1,24 +1,22 @@
-require('dotenv').config()
+require("dotenv").config();
+const http2 = require("http2");
+const fs = require("fs");
 const express = require("express");
 const cors = require("cors");
 const path = require("path");
 const mongoose = require("mongoose");
 
 // API ROUTES
-const pricing = require('./api/routes/pricing')
+const pricing = require("./api/routes/pricing");
 
 // // MONGO DB Config
 const db = require("./config/keys").mongoURI;
 
 // Connect to MongoDB
 mongoose
-  .connect(
-    db,
-    { useNewUrlParser: true, useCreateIndex: true }
-  )
+  .connect(db, { useNewUrlParser: true, useCreateIndex: true })
   .then(() => console.log("MongoDB Connected"))
   .catch(err => console.log(err));
-
 
 // SPECIFY ENVIRONMENT
 const dev = process.env.NODE_ENV !== "production";
@@ -31,8 +29,12 @@ const app = express();
 
 function requireHTTPS(req, res, next) {
   // The 'x-forwarded-proto' check is for Heroku
-  if (!req.secure && req.get('x-forwarded-proto') !== 'https' && process.env.NODE_ENV !== "development") {
-    return res.redirect('https://' + req.get('host') + req.url);
+  if (
+    !req.secure &&
+    req.get("x-forwarded-proto") !== "https" &&
+    process.env.NODE_ENV !== "development"
+  ) {
+    return res.redirect("https://" + req.get("host") + req.url);
   }
 
   // return res.redirect('http://' + req.get('host') + req.url);
@@ -43,8 +45,8 @@ function requireHTTPS(req, res, next) {
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(express.static('public'))
-app.use('/api/v1', pricing)
+app.use(express.static("public"));
+app.use("/api/v1", pricing);
 
 if (!dev) {
   app.use(express.static("client/build"));
