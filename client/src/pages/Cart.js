@@ -78,7 +78,9 @@ const Cart = () => {
       <div className="container pt-5">
         <div className="card bg-white mb-3">
           <div className="card-header d-flex justify-content-between align-items-center">
-            <p className="lead">Laundry Cart</p>
+            <Link to="/pricing" className="btn btn-link">
+              <i className="fas fa-chevron-left" /> Continue Adding
+            </Link>
             {cart.length > 0 && (
               <Link to="/checkout" className="btn btn-primary">
                 Checkout
