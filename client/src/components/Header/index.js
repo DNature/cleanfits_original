@@ -1,10 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { AppContext } from "../../Context";
-import styled from "styled-components";
 import "./Header.css";
 
-const Header = ({ pathname = "" }) => {
+const Header = ({ pathname = "", user, signOut }) => {
   const {
     state: { cart },
     dispatch
@@ -20,7 +19,7 @@ const Header = ({ pathname = "" }) => {
         payload: cartFromLocalStorage
       });
     }
-    console.log(123, cartFromLocalStorage);
+    //console.log(123, cartFromLocalStorage);
   }, []);
 
   //console.log(pathname)
@@ -36,8 +35,18 @@ const Header = ({ pathname = "" }) => {
       >
         <div className="container">
           <Link className="navbar-brand" to="/">
+            <img
+              src="/images/logo.svg"
+              width="30"
+              height="30"
+              className="d-inline-block align-top"
+              alt=""
+            />
             Cleanfits
           </Link>
+          {/* <Link className="navbar-brand" to="/">
+            Cleanfits
+          </Link> */}
 
           <Link
             to="/cart"
@@ -141,9 +150,22 @@ const Header = ({ pathname = "" }) => {
                 </Link>
               </li>
             </ul>
-            <Link to="signup" className="btn btn-light">
-              Signup
-            </Link>
+            <div className="btn-group">
+              {user !== null ? (
+                <button onClick={() => signOut()} className="btn btn-primary">
+                  SignOut
+                </button>
+              ) : (
+                <>
+                  <Link to="/signin" className="btn btn-light">
+                    Signin
+                  </Link>
+                  <Link to="/signup" className="btn btn-primary">
+                    Signup
+                  </Link>
+                </>
+              )}
+            </div>
           </div>
         </div>
       </nav>

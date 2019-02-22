@@ -39,7 +39,7 @@ const CartItem = ({
               decrementItemCount(item.price);
               setCount({
                 ...count,
-                [item._id]: count[item._id] - 1 * item.price
+                [item._id]: count[item._id] - 1
               });
             }}
           >
