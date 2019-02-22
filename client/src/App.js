@@ -11,7 +11,8 @@ import Contact from "./pages/Contact";
 import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
 import FourOFour from "./pages/404";
-import Signup from "./pages/Signup";
+import SignIn from "./pages/SignIn";
+import SignUp from "./pages/SignUp";
 import { AppProvider } from "./Context";
 
 // Admin pages ---> Authenticated routes
@@ -32,7 +33,8 @@ function App() {
             <Route exact path="/contact" component={Contact} />
             <Route exact path="/cart" component={Cart} />
             <Route exact path="/checkout" component={Checkout} />
-            <Route exact path="/signup" component={Signup} />
+            <Route exact path="/signin" component={SignIn} />
+            <Route exact path="/signup" component={SignUp} />
             <Route path="/admin" component={AdminHome} />
             <Route exact path="/admin/login" component={AdminLogin} />
             <Route component={FourOFour} />

@@ -1,101 +1,181 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import { Link, Redirect } from "react-router-dom";
+import { db, firebase, isAuthenticated } from "../auth";
+import useFirebaseSignup from "../hooks/useFirebaseSignup";
 
 const SignupPage = styled.div`
-  height: 100vh;
+  min-height: 100vh;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
 `;
 
-const Button = styled.button`
-  background-color: #ffffff;
-  outline: none;
-`;
+const ErrorMessage = ({ message }) => {
+  return (
+    <div
+      className="alert alert-danger alert-dismissible fade show"
+      role="alert"
+    >
+      {message}
+      <button
+        type="button"
+        className="close"
+        data-dismiss="alert"
+        aria-label="Close"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  );
+};
 
-const Signup = ({ currentView }) => {
-  const [view, setView] = useState((currentView = "signup"));
+const SignUp = () => {
+  const [firstname, setFirstName] = useState("");
+  const [lastname, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhoneNumber] = useState("");
+  const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [user, setUser] = useState(null);
+  const [error, setError] = useState(null);
+  const [redirect, setRedirect] = useState(false);
+
+  useEffect(() => {
+    isAuthenticated ? setRedirect(true) : setRedirect(false);
+  }, []);
+
+  const signup = e => {
+    e.preventDefault();
+
+    // Load spinner icon in signup button
+    setIsLoading(true);
+
+    firebase
+      .auth()
+      .createUserWithEmailAndPassword(email, password)
+      .then(user => {
+        if (user.user.uid) {
+          // Signup  was successful
+          // Now we proceed to add user data to cloud firestore
+          db.collection("users")
+            .add({
+              firstname,
+              lastname,
+              email,
+              phone,
+              createdAt: new Date().toISOString(),
+              updatedAt: new Date().toISOString()
+            })
+            .then(user => {
+              setUser(user);
+              setIsLoading(false);
+            })
+            .catch(err => {
+              setError(err.message);
+              setIsLoading(false);
+            });
+        }
+      })
+      .catch(err => {
+        setError(err.message);
+      });
+  };
+
+  if (redirect && JSON.parse(localStorage.getItem("cart")).length > 0) {
+    return <Redirect to="/cart" />;
+  }
+
+  if (redirect && JSON.parse(localStorage.getItem("cart")).length === 0) {
+    return <Redirect to="/" />;
+  }
+
   return (
     <SignupPage>
       <div className="row w-100">
-        <div className="col-xs-12 col-sm-12 col-md-8 col-lg-8 mx-auto">
-          <div className="row bg-white mb-5" style={{ marginTop: "-100px" }}>
-            <div className="col-6">
-              <button
-                style={{
-                  background: "white",
-                  outline: 0,
-                  borderBottom: view === "login" ? "3px solid #ccc" : 0
-                }}
-                className="btn btn-block btn-lg btn-light"
-                onClick={() => setView("login")}
-              >
-                Login
-              </button>
+        <div className="col-xs-12 col-sm-10 col-md-6 col-lg-4 mx-auto card card-body my-5">
+          <h2 className="text-center my-4">Create an Account</h2>
+          {error !== null && <ErrorMessage message={error} />}
+          <form className="user-login-form w-100" onSubmit={e => signup(e)}>
+            <div className="form-group">
+              <label htmlFor="firstname">First Name</label>
+              <input
+                type="firstname"
+                className="form-control"
+                id="firstname"
+                placeholder="Enter First Name"
+                value={firstname}
+                onChange={e => setFirstName(e.target.value)}
+              />
             </div>
-            <div className="col-6">
-              <button
-                style={{
-                  background: "white",
-                  outline: 0,
-                  borderBottom: view === "signup" ? "3px solid #ccc" : 0
-                }}
-                className="btn btn-block btn-lg btn-light"
-                onClick={() => setView("signup")}
-              >
-                Signup
-              </button>
+            <div className="form-group">
+              <label htmlFor="firstname">Last Name</label>
+              <input
+                type="lasttname"
+                className="form-control"
+                id="lastname"
+                placeholder="Enter Last Name"
+                value={lastname}
+                onChange={e => setLastName(e.target.value)}
+              />
             </div>
-          </div>
+            <div className="form-group">
+              <label htmlFor="email">Email</label>
+              <input
+                type="email"
+                className="form-control"
+                id="email"
+                placeholder="Enter Email Address"
+                value={email}
+                onChange={e => setEmail(e.target.value)}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="phone">Phone Number</label>
+              <input
+                type="number"
+                id="phone"
+                className="form-control"
+                placeholder="Enter Phone Number"
+                value={phone}
+                onChange={e => setPhoneNumber(e.target.value)}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="password">Password</label>
+              <input
+                type="password"
+                className="form-control"
+                id="password"
+                placeholder="Create a New Password"
+                value={password}
+                onChange={e => setPassword(e.target.value)}
+              />
+            </div>
+            <button type="submit" className="btn btn-block btn-primary mb-3">
+              {isLoading !== false && (
+                <span
+                  className="spinner-border spinner-border-sm mr-4"
+                  role="status"
+                  aria-hidden="true"
+                />
+              )}
+              SIGNUP
+            </button>
 
-          <div className="row">
-            {view === "login" ? (
-              <div className="col-12">
-                <form className="user-login-form">
-                  <div className="form-group">
-                    <label htmlFor="email">Email</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="email"
-                      placeholder="johndoe@example.com"
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="password">Password</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="password"
-                      placeholder="Your Password"
-                    />
-                  </div>
-                  {/* <button type="submit" className="btn btn-block btn-primary">
-                    LOGIN
-                  </button> */}
-                </form>
-              </div>
-            ) : (
-              <div className="col-12">
-                <form className="user-signup-form">
-                  <div className="form-group">
-                    <label htmlFor="name">Full Name</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="name"
-                      placeholder="John Doe"
-                    />
-                  </div>
-                </form>
-              </div>
-            )}
-          </div>
+            <p className="pt-2 text-muted">
+              Already have an account? Click{" "}
+              <Link to="/signin" className="btn-link">
+                here
+              </Link>{" "}
+              to login.
+            </p>
+          </form>
         </div>
       </div>
     </SignupPage>
   );
 };
 
-export default Signup;
+export default SignUp;
