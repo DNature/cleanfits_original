@@ -31,7 +31,7 @@ const ErrorMessage = ({ message }) => {
   );
 };
 
-const SignUp = () => {
+const Register = () => {
   const [firstname, setFirstName] = useState("");
   const [lastname, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -178,4 +178,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default Register;

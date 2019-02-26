@@ -12,12 +12,13 @@ import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
 import FourOFour from "./pages/404";
 import SignIn from "./pages/SignIn";
-import SignUp from "./pages/SignUp";
+
 import { AppProvider } from "./Context";
 
 // Admin pages ---> Authenticated routes
 import AdminHome from "./pages/Admin";
 import AdminLogin from "./pages/Admin/Login";
+import Register from "./pages/Register";
 
 function App() {
   return (
@@ -34,7 +35,7 @@ function App() {
             <Route exact path="/cart" component={Cart} />
             <Route exact path="/checkout" component={Checkout} />
             <Route exact path="/signin" component={SignIn} />
-            <Route exact path="/signup" component={SignUp} />
+            <Route exact path="/signup" component={Register} />
             <Route path="/admin" component={AdminHome} />
             <Route exact path="/admin/login" component={AdminLogin} />
             <Route component={FourOFour} />

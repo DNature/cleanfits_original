@@ -37,12 +37,11 @@ const Header = ({ pathname = "", user, signOut }) => {
           <Link className="navbar-brand" to="/">
             <img
               src="/images/logo.svg"
-              width="30"
-              height="30"
+              height="20"
               className="d-inline-block align-top"
               alt=""
+              style={{ marginTop: 5 }}
             />
-            Cleanfits
           </Link>
           {/* <Link className="navbar-brand" to="/">
             Cleanfits
