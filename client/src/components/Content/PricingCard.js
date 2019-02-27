@@ -47,6 +47,10 @@ const PricingCard = ({ item }) => {
 
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(myCart));
+    if (cart.length === 0) {
+      let count = {};
+      localStorage.setItem("count", JSON.stringify(count));
+    }
   }, [myCart]);
 
   const itemIsInCart = () => {

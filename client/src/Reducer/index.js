@@ -14,16 +14,11 @@ const reducer = (state, action) => {
       return Object.assign({}, state, {
         pricing: [...state.pricing, ...action.payload]
       });
+    case "SET_ORDERS":
+      return Object.assign({}, state, {
+        orders: [...state.orders, ...action.payload]
+      });
     case "ADD_TO_CART":
-      // let index = null;
-
-      // state.cart.forEach((cartItem, i) => {
-      //   if(cartItem._id === action.payload.id)
-      //     index = i
-      // })
-
-      // let newCart = state.cart.splice(index, 1);
-
       return Object.assign({}, state, {
         cart: [...state.cart, action.payload]
       });
