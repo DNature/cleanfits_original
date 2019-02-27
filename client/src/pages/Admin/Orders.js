@@ -1,12 +1,18 @@
-import React, { useContext, useState } from "react";
-import { AppContext } from "../../Context";
+import React from "react";
 
-const SortablePricingTable = ({ editPricing, deletePricing }) => {
-  const {
-    state: { pricing }
-  } = useContext(AppContext);
-  const [scrollPosition, setScrollPosition] = useState(window.scrollY);
+const template = (total, orderId) => {
+  const subject = "Your Order from Cleanfits";
+  const body = `Thank you for choosing cleanfits. \n\n
 
+    We received your order with id ${orderId}. \n
+    Total payment made with paystack was N${total} \n\n
+
+    Thank you for choosing Cleanfits. Best regards.
+  `;
+  return { subject, body };
+};
+
+const Orders = ({ orders, viewMore, markAsDelivered }) => {
   return (
     <div
       className="sortable-pricing-table my-5 px-1"
@@ -15,7 +21,7 @@ const SortablePricingTable = ({ editPricing, deletePricing }) => {
         overflowY: "scroll"
       }}
     >
-      <button
+      {/* <button
         onClick={() => {
           setScrollPosition(0);
           window.scrollTo(0, scrollPosition);
@@ -31,32 +37,34 @@ const SortablePricingTable = ({ editPricing, deletePricing }) => {
               : "fas fa-spinner fa-spin pl-1"
           }
         />
-      </button>
+      </button> */}
 
       <table className="table table-hover">
         <thead>
           <tr>
-            <th scope="col">Name</th>
-            <th scope="col">Price</th>
-            {/* <th scope="col">Discount</th> */}
-            <th scope="col">Status</th>
+            <th scope="col">Order ID</th>
+            <th scope="col">Items/Total</th>
+            <th scope="col">Delivered</th>
+            {/* <th scope="col">User</th> */}
             <th scope="col">Action</th>
           </tr>
         </thead>
         <tbody>
-          {pricing.length > 0 &&
-            pricing.map(item => (
-              <tr key={item._id}>
-                <td>{item.name}</td>
-                <td>{item.price}</td>
-                {/* <td>{item.discount}%</td> */}
+          {orders.length > 0 &&
+            orders.map(order => (
+              <tr key={order._id}>
+                <td>{order.orderId}</td>
                 <td>
-                  {item.status === "published" ? (
-                    <span className="text-success">Pushlished</span>
+                  {order.cart.length} items @ N{order.subTotal}
+                </td>
+                <td>
+                  {order.delivered === true ? (
+                    <span className="text-dark">Yes</span>
                   ) : (
-                    <span className="text-warning">Draft</span>
+                    <span className="text-danger">No</span>
                   )}
                 </td>
+                {/* <td style={{ overflowX: "scroll" }}>{order.userEmail}</td> */}
                 <td>
                   <div className="dropdown">
                     <button
@@ -78,19 +86,27 @@ const SortablePricingTable = ({ editPricing, deletePricing }) => {
                       aria-labelledby="dropdownMenuButton"
                     >
                       <button
-                        onClick={() => editPricing(item._id)}
+                        onClick={() => viewMore(order._id)}
                         className="dropdown-item btn btn-light"
                         data-toggle="modal"
-                        data-target="#editPricingModal"
+                        data-target="#viewCompleteOrder"
                       >
-                        Edit
+                        View More
                       </button>
                       <button
-                        onClick={() => deletePricing(item._id)}
-                        className="dropdown-item btn btn-danger"
+                        onClick={() => markAsDelivered(order._id)}
+                        className="dropdown-item btn btn-light"
                       >
-                        Delete
+                        Mark as Delivered
                       </button>
+                      <a
+                        href={`mailto:${order.userEmail}?subject=${
+                          template(order.subTotal).subject
+                        }&body=${template(order.subTotal).body}`}
+                        className="dropdown-item btn btn-light"
+                      >
+                        Email User
+                      </a>
                     </div>
                   </div>
                 </td>
@@ -102,4 +118,4 @@ const SortablePricingTable = ({ editPricing, deletePricing }) => {
   );
 };
 
-export default SortablePricingTable;
+export default Orders;

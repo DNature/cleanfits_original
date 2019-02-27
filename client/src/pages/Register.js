@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Link, Redirect } from "react-router-dom";
 import { db, firebase, isAuthenticated } from "../auth";
-import useFirebaseSignup from "../hooks/useFirebaseSignup";
+import axios from "axios";
 
 const SignupPage = styled.div`
   min-height: 100vh;
@@ -37,6 +37,7 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [phone, setPhoneNumber] = useState("");
   const [password, setPassword] = useState("");
+  const [address, setAddress] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [user, setUser] = useState(null);
   const [error, setError] = useState(null);
@@ -59,17 +60,41 @@ const Register = () => {
         if (user.user.uid) {
           // Signup  was successful
           // Now we proceed to add user data to cloud firestore
-          db.collection("users")
-            .add({
+          let authUser = firebase.auth().currentUser;
+
+          // db.collection("users")
+          //   .add({
+          //     firstname,
+          //     lastname,
+          //     email,
+          //     phone,
+          //     address,
+          //     createdAt: new Date().toISOString(),
+          //     updatedAt: new Date().toISOString()
+          //   })
+          //   .then(user => {
+          //     authUser.sendEmailVerification();
+          //     firebase.auth().signOut();
+          //     setUser(user);
+          //     setIsLoading(false);
+          //   })
+          //   .catch(err => {
+          //     setError(err.message);
+          //     setIsLoading(false);
+          //   });
+          axios({
+            url: "/api/v1/users",
+            method: "POST",
+            data: {
               firstname,
               lastname,
               email,
               phone,
-              createdAt: new Date().toISOString(),
-              updatedAt: new Date().toISOString()
-            })
-            .then(user => {
-              setUser(user);
+              address
+            }
+          })
+            .then(res => {
+              setUser(res.data.user);
               setIsLoading(false);
             })
             .catch(err => {
@@ -80,6 +105,8 @@ const Register = () => {
       })
       .catch(err => {
         setError(err.message);
+        setIsLoading(false);
+        window.scrollTo(0, 0);
       });
   };
 
@@ -101,6 +128,7 @@ const Register = () => {
             <div className="form-group">
               <label htmlFor="firstname">First Name</label>
               <input
+                required
                 type="firstname"
                 className="form-control"
                 id="firstname"
@@ -112,6 +140,7 @@ const Register = () => {
             <div className="form-group">
               <label htmlFor="firstname">Last Name</label>
               <input
+                required
                 type="lasttname"
                 className="form-control"
                 id="lastname"
@@ -123,6 +152,7 @@ const Register = () => {
             <div className="form-group">
               <label htmlFor="email">Email</label>
               <input
+                required
                 type="email"
                 className="form-control"
                 id="email"
@@ -134,6 +164,7 @@ const Register = () => {
             <div className="form-group">
               <label htmlFor="phone">Phone Number</label>
               <input
+                required
                 type="number"
                 id="phone"
                 className="form-control"
@@ -145,12 +176,26 @@ const Register = () => {
             <div className="form-group">
               <label htmlFor="password">Password</label>
               <input
+                required
                 type="password"
                 className="form-control"
                 id="password"
                 placeholder="Create a New Password"
                 value={password}
                 onChange={e => setPassword(e.target.value)}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="address">Shipping address</label>
+              <textarea
+                required
+                id="address"
+                cols="30"
+                rows="7"
+                value={address}
+                className="form-control"
+                placeholder="e.g - Plot 127, Mayne Street off Nepa office, Maitama Abuja."
+                onChange={e => setAddress(e.target.value)}
               />
             </div>
             <button type="submit" className="btn btn-block btn-primary mb-3">

@@ -3,6 +3,7 @@ import { AppContext } from "../Context";
 import Layout from "../Layout";
 import { Link } from "react-router-dom";
 import CartItem from "../components/Content/CartItem";
+import uuid from "uuidv4";
 
 const Cart = () => {
   /**
@@ -99,7 +100,7 @@ const Cart = () => {
               <ul className="list-group list-group-flush">
                 {cart.map(item => (
                   <CartItem
-                    key={item._id}
+                    key={uuid()}
                     item={item}
                     count={count}
                     setCount={setCount}

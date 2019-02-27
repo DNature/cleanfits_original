@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import PricingTable from "../components/Content/PricingTable";
+// import PricingTable from "../components/Content/PricingTable";
 import { AppContext } from "../Context";
 import Layout from "../Layout";
 import PricingCard from "../components/Content/PricingCard";
@@ -43,7 +43,7 @@ const Pricing = ({ location }) => {
             </div>
           )}
         </div>
-        <PricingTable title="Subscribe" />
+        {/* <PricingTable title="Subscribe" /> */}
       </div>
     </Layout>
   );
