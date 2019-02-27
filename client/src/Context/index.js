@@ -4,16 +4,11 @@ import axios from "axios";
 import { pathInEnv } from "../utils";
 const AppContext = React.createContext();
 
-const auth = {
-  firebaseWebClientID:
-    "1082120578140-ecd3gntuh7jcpamv4gc4ah3hk474089n.apps.googleusercontent.com",
-  firebaseWebClientSecret: "BYCxCTvFmcindLz2YPqRC-iS"
-};
-
 function AppProvider({ children }) {
   const initialState = useMemo(() => {
     return {
       pricing: [],
+      orders: [],
       pricingStatus: null,
       cart: [],
       name: "francis"
@@ -31,6 +26,20 @@ function AppProvider({ children }) {
       .then(response => {
         console.log(response.data);
         dispatch({ type: "SET_PRICING", payload: response.data.pricingList });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }, []);
+
+  React.useEffect(() => {
+    axios({
+      url: pathInEnv("/api/v1/orders"),
+      method: "GET"
+    })
+      .then(response => {
+        console.log(response.data);
+        dispatch({ type: "SET_ORDERS", payload: response.data.orders });
       })
       .catch(err => {
         console.log(err);
