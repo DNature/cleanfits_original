@@ -8,6 +8,8 @@ const mongoose = require("mongoose");
 
 // API ROUTES
 const pricing = require("./api/routes/pricing");
+const users = require("./api/routes/users");
+const orders = require("./api/routes/orders");
 
 // // MONGO DB Config
 const db = require("./config/keys").mongoURI;
@@ -47,6 +49,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static("public"));
 app.use("/api/v1", pricing);
+app.use("/api/v1", users);
+app.use("/api/v1", orders);
 
 if (!dev) {
   app.use(express.static("client/build"));
