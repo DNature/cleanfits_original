@@ -19,6 +19,7 @@ import { AppProvider } from "./Context";
 import AdminHome from "./pages/Admin";
 import AdminLogin from "./pages/Admin/Login";
 import Register from "./pages/Register";
+import ResetPassword from "./pages/ResetPassword";
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
             <Route exact path="/checkout" component={Checkout} />
             <Route exact path="/signin" component={SignIn} />
             <Route exact path="/signup" component={Register} />
+            <Route path="/reset-password" component={ResetPassword} />
             <Route path="/admin" component={AdminHome} />
             <Route exact path="/admin/login" component={AdminLogin} />
             <Route component={FourOFour} />
