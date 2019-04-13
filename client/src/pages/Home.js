@@ -13,7 +13,6 @@ const Home = ({ location }) => {
       <main style={{ display: "block" }}>
         <Experience />
         <HowItWorks title="How it Works" />
-        {/* <PricingTable title="Pricing" /> */}
         <GetInTouch title="Get In Touch" />
       </main>
     </Layout>
@@ -25,10 +24,3 @@ Home.propTypes = {
 };
 
 export default Home;
-
-// className="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 d-flex justify-content-center align-items-center px-3"
-//             style={{
-//               minHeight: '50vh',
-//               flexDirection: 'column',
-//               textAlign: 'center'
-//             }}
