@@ -22,6 +22,9 @@ const Pricing = ({ location }) => {
     <Layout pathname={location.pathname}>
       <div className="container pt-5">
         <div className="row">
+          <div className="col-12">
+           <a href="https://c.jumia.io/?a=160534&c=874&p=r&E=kkYNyk2M4sk%3D&utm_campaign=160534&utm_term="><img src="https://affiliates.jumia.com/banners/Jumia Nigeria/PhonesTablets/NewsmartPhone  300x250.jpg"/></a>
+          </div>
           {pricing.length > 0 ? (
             pricing.map(item => (
               <div
