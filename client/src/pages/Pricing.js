@@ -22,9 +22,6 @@ const Pricing = ({ location }) => {
     <Layout pathname={location.pathname}>
       <div className="container pt-5">
         <div className="row">
-          <div className="col-12">
-           <a href="https://c.jumia.io/?a=160534&c=874&p=r&E=kkYNyk2M4sk%3D&utm_campaign=160534&utm_term="><img src="https://affiliates.jumia.com/banners/Jumia Nigeria/PhonesTablets/NewsmartPhone  300x250.jpg"/></a>
-          </div>
           {pricing.length > 0 ? (
             pricing.map(item => (
               <div
@@ -32,7 +29,6 @@ const Pricing = ({ location }) => {
                 className="col-xs-12 col-sm-12 col-md-6 col-lg-3 col-xl-3 d-flex justify-content-between"
               >
                 <PricingCard item={item} />
-                <a href="https://c.jumia.io/?a=160534&c=446&p=r&E=kkYNyk2M4sk%3D&utm_campaign=160534&utm_term="><img src="https://affiliates.jumia.com/banners/MTbZMWXnS2gozwuWZLjRCRBsL2AMfMKEKBSOYhmH.jpeg"/></a>
               </div>
             ))
           ) : (
