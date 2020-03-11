@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Dry cleaning agency website",
   "main": "server.js",
-  "author": "Udeji Francis",
+  "author": "Divine Hycenth"
   "license": "MIT",
   "scripts": {
     "client-install": "npm install --prefix client",
